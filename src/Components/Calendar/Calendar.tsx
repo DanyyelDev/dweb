@@ -6,6 +6,12 @@ function Calendar() {
   const [activeDay, setActiveDay] = useState<number>();
   const [month, setMonth] = useState<number>(today.getMonth());
   const [year, setYear] = useState<number>(today.getFullYear());
+  const day = today.toString().substring(0, 3);
+
+  const [eventName, setEventName] = useState('');
+  const [eventTimeFrom, setEventTimeFrom] = useState('');
+  const [eventTimeTo, setEventTimeTo] = useState('');
+
 
   const months = [
     "January",
@@ -21,7 +27,7 @@ function Calendar() {
     "November",
     "December",
   ];
-
+  console.log("day = ", day, "mes = ", months[month], "año =", year);
   const eventsArr: any[] = [];
 
   console.log(eventsArr);
@@ -145,6 +151,47 @@ function Calendar() {
     // Function to update events
   };
 
+  const handleEventNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEventName(event.target.value);
+  }
+
+  const handleEventTimeFromChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEventTimeFrom(event.target.value);
+  }
+
+  const handleEventTimeToChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEventTimeTo(event.target.value);
+  }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Crear objeto de datos a enviar al backend
+    const eventData = {
+      eventName,
+      eventTimeFrom,
+      eventTimeTo,
+    };
+
+    // Realizar la solicitud de inserción en la base de datos
+    fetch('/api/insert-event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(eventData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Manejar la respuesta del backend si es necesario
+        console.log(data);
+      })
+      .catch(error => {
+        // Manejar el error si ocurre
+        console.error(error);
+      });
+  }
+
+
   return (
     <div className="container">
       <div className="left">
@@ -175,8 +222,8 @@ function Calendar() {
       </div>
       <div className="right">
         <div className="today-date">
-          <div className="event-day">wed</div>
-          <div className="event-date">12th december 2022</div>
+          <div className="event-day">{day}</div>
+          <div className="event-date">{months[month] + " " + year}</div>
         </div>
         <div className="events"></div>
         <div className="add-event-wrapper">
@@ -184,17 +231,25 @@ function Calendar() {
             <div className="title">Add Event</div>
             <i className="fas fa-times close"></i>
           </div>
-          <div className="add-event-body">
-            <div className="add-event-input">
-              <input type="text" placeholder="Event Name" className="event-name" />
+          <form onSubmit={handleSubmit}>
+            <div className="add-event-body">
+              <div className="add-event-input">
+                <input type="text" placeholder="Event Name" className="event-name" value={eventName}
+                  onChange={handleEventNameChange} />
+              </div>
+              <div className="add-event-input">
+                <input type="text" placeholder="Event Time From" className="event-time-from" value={eventTimeFrom}
+                  onChange={handleEventTimeFromChange} />
+              </div>
+              <div className="add-event-input">
+                <input type="text" placeholder="Event Time To" className="event-time-to" value={eventTimeTo}
+                  onChange={handleEventTimeToChange} />
+              </div>
+              <div className="add-event-footer">
+                <button type="submit">Enviar</button>
+              </div>
             </div>
-            <div className="add-event-input">
-              <input type="text" placeholder="Event Time From" className="event-time-from" />
-            </div>
-            <div className="add-event-input">
-              <input type="text" placeholder="Event Time To" className="event-time-to" />
-            </div>
-          </div>
+          </form>
           <div className="add-event-footer">
             <button className="add-event-btn">Add Event</button>
           </div>

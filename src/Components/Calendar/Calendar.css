@@ -170,8 +170,8 @@ body {
 .calendar .days .active {
     position: relative;
     font-size: 2rem;
-    color: #fff;
-    background-color: var(--primary-clr);
+    color: #ffffff;
+    background-color: #b38add;
 }
 
 .calendar .days .active::before {
@@ -435,7 +435,7 @@ body {
     bottom: 100px;
     left: 50%;
     width: 90%;
-    max-height: 0;
+    max-height: 300px;
     overflow: hidden;
     border-radius: 5px;
     background-color: #fff;
