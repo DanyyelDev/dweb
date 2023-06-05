@@ -1,5 +1,5 @@
 //import { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import upcLogo from './../../assets/LogoHorizontal-upc.jpg'
 import './Login.css'
 import { useState } from 'react';
