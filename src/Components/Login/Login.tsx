@@ -50,7 +50,7 @@ function Login() {
   const validateUser = async (username: string, password: string): Promise<boolean> => {
     try {
       // Realizar la solicitud HTTP utilizando fetch
-      const url = `/api/users/?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+      const url = `http://localhost:3000/api/users/?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
       const response = await fetch(url, {
         method: 'GET',
         headers: {

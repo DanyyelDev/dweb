@@ -175,7 +175,7 @@ function Calendar() {
     };
 
     // Realizar la solicitud de inserción en la base de datos
-    fetch('/api/labs', {
+    fetch('http://localhost:3000/api/labs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
