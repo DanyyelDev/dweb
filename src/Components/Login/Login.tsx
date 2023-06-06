@@ -32,7 +32,7 @@ function Login() {
     try {
       // Llamada a la función de validación
       const isValidUser = await validateUser(username, password);
-      
+
       if (isValidUser) {
         // Usuario y contraseña válidos
         console.log('Inicio de sesión exitoso');
@@ -50,17 +50,17 @@ function Login() {
   const validateUser = async (username: string, password: string): Promise<boolean> => {
     try {
       // Realizar la solicitud HTTP utilizando fetch
-      const response = await fetch('/api/login', {
-        method: 'POST',
+      const url = `/api/users/?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+      const response = await fetch(url, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
+        }
       });
 
       // Verificar el estado de la respuesta
-      //if (response.ok ) {
-      if (username == "daniel") {
+      if (response.ok ) {
+      //if (username == "daniel") {
         // La solicitud se realizó correctamente, obtener el resultado
 
         //const result = await response.json();
@@ -87,7 +87,7 @@ function Login() {
           <form className="content__form" onSubmit={handleFormSubmit}>
             <div className="content__inputs">
               <label>
-                <input className="" type="text"  id="username" value={username} onChange={handleUsernameChange} />
+                <input className="" type="text" id="username" value={username} onChange={handleUsernameChange} />
                 <span>username or email</span>
               </label>
               <label>
@@ -95,7 +95,7 @@ function Login() {
                 <span>Password</span>
               </label>
             </div>
-              <button type="submit">Log In</button>
+            <button type="submit">Log In</button>
           </form>
           <div className="content__or-text">
             <span></span>

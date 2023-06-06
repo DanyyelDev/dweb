@@ -8,9 +8,9 @@ function Calendar() {
   const [year, setYear] = useState<number>(today.getFullYear());
   const day = today.toString().substring(0, 3);
 
-  const [eventName, setEventName] = useState('');
-  const [eventTimeFrom, setEventTimeFrom] = useState('');
-  const [eventTimeTo, setEventTimeTo] = useState('');
+  const [name, setEventName] = useState('');
+  const [inicio, setEventTimeFrom] = useState('');
+  const [fin, setEventTimeTo] = useState('');
 
 
   const months = [
@@ -166,16 +166,16 @@ function Calendar() {
     event.preventDefault();
 
     // Crear objeto de datos a enviar al backend
-    const lab = "Lab 001";
+    const sala = "Lab 001";
     const eventData = {
-      lab,
-      eventName,
-      eventTimeFrom,
-      eventTimeTo,
+      name,
+      sala,
+      inicio,
+      fin,
     };
 
     // Realizar la solicitud de inserción en la base de datos
-    fetch('/api/insert-event', {
+    fetch('/api/labs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -236,15 +236,15 @@ function Calendar() {
           <form onSubmit={handleSubmit}>
             <div className="add-event-body">
               <div className="add-event-input">
-                <input type="text" placeholder="Event Name" className="event-name" value={eventName}
+                <input type="text" placeholder="Event Name" className="event-name" value={name}
                   onChange={handleEventNameChange} />
               </div>
               <div className="add-event-input">
-                <input type="text" placeholder="Event Time From" className="event-time-from" value={eventTimeFrom}
+                <input type="text" placeholder="Event Time From" className="event-time-from" value={inicio}
                   onChange={handleEventTimeFromChange} />
               </div>
               <div className="add-event-input">
-                <input type="text" placeholder="Event Time To" className="event-time-to" value={eventTimeTo}
+                <input type="text" placeholder="Event Time To" className="event-time-to" value={fin}
                   onChange={handleEventTimeToChange} />
               </div>
               <div className="add-event-footer">
