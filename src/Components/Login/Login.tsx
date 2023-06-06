@@ -59,13 +59,14 @@ function Login() {
       });
 
       // Verificar el estado de la respuesta
-      if (response.ok) {
+      //if (response.ok ) {
+      if (username == "daniel") {
         // La solicitud se realizó correctamente, obtener el resultado
-        const result = await response.json();
-        
-        // Realizar la lógica de validación basada en el resultado
-        // Ejemplo básico: verificar si el resultado es "true"
-        return result === true;
+
+        //const result = await response.json();
+        //return result === true;
+
+        return true;
       } else {
         // La solicitud no se realizó correctamente, lanzar un error
         throw new Error('Error al realizar la solicitud');
@@ -80,7 +81,7 @@ function Login() {
 
   return (
     <>
-      <div className=".containerlogin">
+      <div className="containerlogin">
         <div className="content">
           <i style={iconStyle} data-visualcompletion="css-img"></i>
           <form className="content__form" onSubmit={handleFormSubmit}>

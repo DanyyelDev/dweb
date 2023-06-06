@@ -166,7 +166,9 @@ function Calendar() {
     event.preventDefault();
 
     // Crear objeto de datos a enviar al backend
+    const lab = "Lab 001";
     const eventData = {
+      lab,
       eventName,
       eventTimeFrom,
       eventTimeTo,

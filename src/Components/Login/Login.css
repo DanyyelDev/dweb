@@ -4,6 +4,8 @@
 }
 
 .containerlogin {
+    width: 400px;
+    height: 600px;
     border-radius: 1px;
     padding: 50px 40px 20px 40px;
     box-sizing: border-box;
